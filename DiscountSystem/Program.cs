@@ -5,7 +5,8 @@ public class Program
     public static void Main()
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
-        var calculator = new DiscountCalculator();
+        var factory = new DiscountStrategyFactory();
+        var calculator = new DiscountCalculator(factory);
 
         var orders = new[]
         {

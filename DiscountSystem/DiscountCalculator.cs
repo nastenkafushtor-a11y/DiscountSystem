@@ -1,19 +1,16 @@
-using System.Collections.Generic;
-
 public class DiscountCalculator
 {
-    private readonly Dictionary<CustomerCategory, IDiscountStrategy>
-        _strategies = new Dictionary<CustomerCategory, IDiscountStrategy>
-        {
-            { CustomerCategory.Normal, new NormalDiscountStrategy() },
-            { CustomerCategory.Loyal, new LoyalDiscountStrategy() },
-            { CustomerCategory.Student, new StudentDiscountStrategy() },
-            { CustomerCategory.VIP, new VipDiscountStrategy() },
-            { CustomerCategory.Corporate, new CorporateDiscountStrategy() }
-        };
+    private readonly IDiscountStrategyFactory _factory;
+
+    public DiscountCalculator(IDiscountStrategyFactory factory)
+    {
+        _factory = factory;
+    }
 
     public double Calculate(Order order)
     {
-        return _strategies[order.CustomerCategory].Calculate(order);
+        CustomerCategory category = order.CustomerCategory;
+        IDiscountStrategy strategy = _factory.Create(category);
+        return strategy.Calculate(order);
     }
 }
