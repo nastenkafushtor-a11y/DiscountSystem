@@ -20,46 +20,66 @@ public class DiscountCalculator
 {
     public double Calculate(Order order)
     {
-        double result = 0;
-
         if (order.CustomerCategory == CustomerCategory.Normal)
         {
-            result = order.TotalPrice;
+            return CalculateNormal(order);
         }
         else if (order.CustomerCategory == CustomerCategory.Loyal)
         {
-            result = order.TotalPrice * 0.95;
-            if (order.TotalPrice > 1000)
-            {
-                result = result - 50;
-            }
+            return CalculateLoyal(order);
         }
         else if (order.CustomerCategory == CustomerCategory.Student)
         {
-            double discount = order.TotalPrice * 0.10;
-            if (discount > 100)
-            {
-                discount = 100;
-            }
-            result = order.TotalPrice - discount;
+            return CalculateStudent(order);
         }
         else if (order.CustomerCategory == CustomerCategory.VIP)
         {
-            result = order.TotalPrice * 0.80;
+            return CalculateVip(order);
         }
         else if (order.CustomerCategory == CustomerCategory.Corporate)
         {
-            if (order.TotalPrice > 500)
-            {
-                result = order.TotalPrice * 0.85;
-            }
-            else
-            {
-                result = order.TotalPrice;
-            }
+            return CalculateCorporate(order);
         }
+        return 0;
+    }
 
+    private double CalculateNormal(Order order)
+    {
+        return order.TotalPrice;
+    }
+
+    private double CalculateLoyal(Order order)
+    {
+        double result = order.TotalPrice * 0.95;
+        if (order.TotalPrice > 1000)
+        {
+            result = result - 50;
+        }
         return result;
+    }
+
+    private double CalculateStudent(Order order)
+    {
+        double discount = order.TotalPrice * 0.10;
+        if (discount > 100)
+        {
+            discount = 100;
+        }
+        return order.TotalPrice - discount;
+    }
+
+    private double CalculateVip(Order order)
+    {
+        return order.TotalPrice * 0.80;
+    }
+
+    private double CalculateCorporate(Order order)
+    {
+        if (order.TotalPrice > 500)
+        {
+            return order.TotalPrice * 0.85;
+        }
+        return order.TotalPrice;
     }
 }
 
