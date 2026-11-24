@@ -18,6 +18,15 @@ public class Order
 
 public class DiscountCalculator
 {
+    private const double LoyalRate = 0.95;
+    private const double LoyalLargeOrderThreshold = 1000;
+    private const double LoyalLargeOrderBonus = 50;
+    private const double StudentDiscountRate = 0.10;
+    private const double StudentMaxDiscount = 100;
+    private const double VipRate = 0.80;
+    private const double CorporateThreshold = 500;
+    private const double CorporateRate = 0.85;
+
     public double Calculate(Order order)
     {
         if (order.CustomerCategory == CustomerCategory.Normal)
@@ -50,34 +59,34 @@ public class DiscountCalculator
 
     private double CalculateLoyal(Order order)
     {
-        double result = order.TotalPrice * 0.95;
-        if (order.TotalPrice > 1000)
+        double result = order.TotalPrice * LoyalRate;
+        if (order.TotalPrice > LoyalLargeOrderThreshold)
         {
-            result = result - 50;
+            result = result - LoyalLargeOrderBonus;
         }
         return result;
     }
 
     private double CalculateStudent(Order order)
     {
-        double discount = order.TotalPrice * 0.10;
-        if (discount > 100)
+        double discount = order.TotalPrice * StudentDiscountRate;
+        if (discount > StudentMaxDiscount)
         {
-            discount = 100;
+            discount = StudentMaxDiscount;
         }
         return order.TotalPrice - discount;
     }
 
     private double CalculateVip(Order order)
     {
-        return order.TotalPrice * 0.80;
+        return order.TotalPrice * VipRate;
     }
 
     private double CalculateCorporate(Order order)
     {
-        if (order.TotalPrice > 500)
+        if (order.TotalPrice > CorporateThreshold)
         {
-            return order.TotalPrice * 0.85;
+            return order.TotalPrice * CorporateRate;
         }
         return order.TotalPrice;
     }
