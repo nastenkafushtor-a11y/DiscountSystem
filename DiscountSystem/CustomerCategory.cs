@@ -1,1 +1,4 @@
-public enum CustomerCategory { Normal, Loyal, Student, VIP, Corporate }
+public enum CustomerCategory
+{
+    Normal, Loyal, Student, VIP, Corporate, Pensioner
+}

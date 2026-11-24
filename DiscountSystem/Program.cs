@@ -41,13 +41,14 @@ public class Program
         Console.WriteLine("3 - Студент");
         Console.WriteLine("4 - VIP");
         Console.WriteLine("5 - Корпоративний");
+        Console.WriteLine("6 - Пенсіонер");
 
         while (true)
         {
             Console.Write("Ваш вибір: ");
             string input = Console.ReadLine();
             bool isNumber = int.TryParse(input, out int choice);
-            if (isNumber && choice >= 1 && choice <= 5)
+            if (isNumber && choice >= 1 && choice <= 6)
             {
                 return (CustomerCategory)(choice - 1);
             }

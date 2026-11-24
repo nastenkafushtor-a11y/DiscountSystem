@@ -16,6 +16,8 @@ public class DiscountStrategyFactory : IDiscountStrategyFactory
                 return new VipDiscountStrategy();
             case CustomerCategory.Corporate:
                 return new CorporateDiscountStrategy();
+            case CustomerCategory.Pensioner:
+                return new PensionerDiscountStrategy();
             default:
                 throw new ArgumentException("Невідома категорія клієнта");
         }

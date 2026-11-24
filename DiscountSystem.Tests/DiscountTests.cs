@@ -70,6 +70,27 @@ public class DiscountTests
     }
 
     [Fact]
+    public void Pensioner_1000_TwelvePercent()
+    {
+        var order = new Order(1, 1000, CustomerCategory.Pensioner);
+        Assert.Equal(880, calculator.Calculate(order), 2);
+    }
+
+    [Fact]
+    public void Pensioner_150_FivePercent()
+    {
+        var order = new Order(1, 150, CustomerCategory.Pensioner);
+        Assert.Equal(142.5, calculator.Calculate(order), 2);
+    }
+
+    [Fact]
+    public void Pensioner_200_FivePercent()
+    {
+        var order = new Order(1, 200, CustomerCategory.Pensioner);
+        Assert.Equal(190, calculator.Calculate(order), 2);
+    }
+
+    [Fact]
     public void Factory_UnknownCategory_ThrowsException()
     {
         var factory = new DiscountStrategyFactory();
